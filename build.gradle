@@ -30,8 +30,8 @@ publishing {
 		maven {
 			url = "https://maven.pkg.github.com/ivorobioff/techmoodivns-app-support"
 			credentials {
-				username = System.getenv("GITHUB_PKG_ACTOR")
-				password = System.getenv("GITHUB_PKG_TOKEN")
+				username = project.findProperty('github.pkg.actor')
+				password = project.findProperty('github.pkg.token')
 			}
 		}
 	}
