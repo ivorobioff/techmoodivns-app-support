@@ -16,6 +16,10 @@ public class InvalidPayloadException extends FriendlyException {
         super(Map.of("errors", errors));
     }
 
+    public InvalidPayloadException(String field, String error) {
+        super(Map.of(field, error));
+    }
+
     public static Map<String, String> parseErrors(Errors errors) {
         Map<String, String> errorsMap = new HashMap<>();
 
