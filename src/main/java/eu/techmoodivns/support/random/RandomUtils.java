@@ -1,6 +1,7 @@
 package eu.techmoodivns.support.random;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -105,6 +106,8 @@ public class RandomUtils {
         }
 
         Predicate<Field> predicate = field -> !excludes.contains(field.getName())
+                && !Modifier.isFinal(field.getModifiers())
+                && !Modifier.isStatic(field.getModifiers())
                 && resolveValue(from, field) != null;
 
         Consumer<Field> action = fromField ->
