@@ -52,7 +52,7 @@ public class SecurityConfigurer {
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new SecretAuthenticationFilter(), BasicAuthenticationFilter.class);
+        http.addFilterAfter(new SecretAuthenticationFilter(), BasicAuthenticationFilter.class);
 
         if (applicationContext.getBeanNamesForType(CorsConfiguration.class).length > 0) {
             http.cors();
