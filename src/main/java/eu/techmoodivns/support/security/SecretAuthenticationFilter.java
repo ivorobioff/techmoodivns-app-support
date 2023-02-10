@@ -3,6 +3,7 @@ package eu.techmoodivns.support.security;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import eu.techmoodivns.support.security.authenticator.Authenticator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,26 +13,31 @@ import java.io.IOException;
 public class SecretAuthenticationFilter extends OncePerRequestFilter {
 
     private String name;
+    private Authenticator authenticator;
 
-    public SecretAuthenticationFilter() {
-        this("Secret-Token");
+    public SecretAuthenticationFilter(Authenticator authenticator) {
+        this("Secret-Token", authenticator);
     }
 
-
-    public SecretAuthenticationFilter(String name) {
+    public SecretAuthenticationFilter(String name, Authenticator authenticator) {
         this.name = name;
+        this.authenticator = authenticator;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         String secret = request.getHeader(name);
 
         if (secret != null) {
             var securityContext = SecurityContextHolder.createEmptyContext();
 
-            securityContext.setAuthentication(new SecretAuthentication(secret));
+            var resolution = authenticator.login(secret);
 
-            SecurityContextHolder.setContext(securityContext);
+            if (resolution != null) {
+                securityContext.setAuthentication(new AuthenticatedAuthentication(resolution));
+                SecurityContextHolder.setContext(securityContext);
+            }
         }
 
         filterChain.doFilter(request, response);
