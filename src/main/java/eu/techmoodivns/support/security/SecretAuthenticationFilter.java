@@ -27,7 +27,11 @@ public class SecretAuthenticationFilter extends OncePerRequestFilter {
         String secret = request.getHeader(name);
 
         if (secret != null) {
-            SecurityContextHolder.getContext().setAuthentication(new SecretAuthentication(secret));
+            var securityContext = SecurityContextHolder.createEmptyContext();
+
+            securityContext.setAuthentication(new SecretAuthentication(secret));
+
+            SecurityContextHolder.setContext(securityContext);
         }
 
         filterChain.doFilter(request, response);
