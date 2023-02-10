@@ -3,11 +3,8 @@ package eu.techmoodivns.support.security;
 import eu.techmoodivns.support.cors.CorsConfiguration;
 import eu.techmoodivns.support.security.preference.SecurityPreference;
 
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -20,17 +17,6 @@ import static java.util.stream.Collectors.*;
 
 @Component
 public class SecurityConfigurer {
-
-    @Bean
-    AuthenticationManager configureAuthenticationManager(
-            HttpSecurity http,
-            AuthenticationManagerBuilder authenticationManagerBuilder,
-            AutowireCapableBeanFactory beanFactory) throws Exception {
-
-        var authenticationProvider = beanFactory.createBean(SecretAuthenticationProvider.class);
-
-        return authenticationManagerBuilder.authenticationProvider(authenticationProvider).build();
-    }
 
     @Bean
     WebSecurityCustomizer configureWebSecurity(SecurityPreference securityPreference) throws Exception {
@@ -57,6 +43,12 @@ public class SecurityConfigurer {
             ApplicationContext applicationContext) throws Exception {
 
         http.securityMatcher("/api/v1.0/**");
+
+        var authenticationProvider = applicationContext
+                .getAutowireCapableBeanFactory()
+                .createBean(SecretAuthenticationProvider.class);
+
+        http.authenticationProvider(authenticationProvider);
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
