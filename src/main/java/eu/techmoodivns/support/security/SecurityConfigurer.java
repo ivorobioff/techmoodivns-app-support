@@ -2,6 +2,8 @@ package eu.techmoodivns.support.security;
 
 import eu.techmoodivns.support.cors.CorsConfiguration;
 import eu.techmoodivns.support.security.preference.SecurityPreference;
+
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +25,9 @@ public class SecurityConfigurer {
     AuthenticationManager configureAuthenticationManager(
             HttpSecurity http,
             AuthenticationManagerBuilder authenticationManagerBuilder,
-            SecretAuthenticationProvider authenticationProvider) throws Exception {
+            AutowireCapableBeanFactory beanFactory) throws Exception {
+
+        var authenticationProvider = beanFactory.createBean(SecretAuthenticationProvider.class);
 
         return authenticationManagerBuilder.authenticationProvider(authenticationProvider).build();
     }
@@ -49,8 +53,8 @@ public class SecurityConfigurer {
 
     @Bean
     SecurityFilterChain configureSecurityFilterChain(
-        HttpSecurity http, 
-        ApplicationContext applicationContext) throws Exception {
+            HttpSecurity http,
+            ApplicationContext applicationContext) throws Exception {
 
         http.securityMatcher("/api/v1.0/**");
 
