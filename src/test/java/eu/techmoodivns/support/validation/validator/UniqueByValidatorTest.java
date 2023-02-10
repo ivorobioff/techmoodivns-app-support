@@ -11,10 +11,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 
-import javax.validation.ConstraintValidatorContext;
-import static javax.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
-import static javax.validation.ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext;
-import javax.validation.Payload;
+import jakarta.validation.ConstraintValidatorContext;
+import static jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder;
+import static jakarta.validation.ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext;
+import jakarta.validation.Payload;
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.regex.Pattern;

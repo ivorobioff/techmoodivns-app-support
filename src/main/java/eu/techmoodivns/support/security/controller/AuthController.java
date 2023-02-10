@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import eu.techmoodivns.support.security.authenticator.Authenticator.Resolution;
 import eu.techmoodivns.support.security.authenticator.Authenticator.Credentials;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

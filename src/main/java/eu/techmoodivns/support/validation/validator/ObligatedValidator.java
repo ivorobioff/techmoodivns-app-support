@@ -1,7 +1,7 @@
 package eu.techmoodivns.support.validation.validator;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import java.util.Collection;
 import java.util.Objects;

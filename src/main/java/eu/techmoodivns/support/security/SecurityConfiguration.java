@@ -8,7 +8,6 @@ import eu.techmoodivns.support.security.preference.SecurityPreference;
 import eu.techmoodivns.support.security.preference.SecurityPreferenceCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -26,9 +25,6 @@ public class SecurityConfiguration {
 
     @Autowired
     private AutowireCapableBeanFactory autowireCapableBeanFactory;
-
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Autowired
     private SecurityProperties securityProperties;

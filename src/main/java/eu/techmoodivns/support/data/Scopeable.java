@@ -62,4 +62,9 @@ public class Scopeable implements Pageable {
     public boolean hasPrevious() {
         return false;
     }
+
+    @Override
+    public Pageable withPage(int pageNumber) {
+        throw new UnsupportedOperationException();
+    }
 }

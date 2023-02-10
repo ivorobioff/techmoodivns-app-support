@@ -8,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -21,7 +20,7 @@ import static eu.techmoodivns.support.security.controller.AuthController.*;
 import static java.util.stream.Collectors.*;
 
 @Component
-public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
+public class SecurityConfigurer {
 
     @Autowired
     private SecurityPreference securityPreference;

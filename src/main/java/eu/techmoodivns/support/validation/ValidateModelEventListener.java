@@ -1,6 +1,5 @@
 package eu.techmoodivns.support.validation;
 
-import eu.techmoodivns.support.validation.InvalidPayloadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
