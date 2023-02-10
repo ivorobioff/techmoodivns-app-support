@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'eu.techmoodivns.support'
-version = '1.6.2'
+version = '1.6.3'
 
 sourceCompatibility = 17
 targetCompatibility = 17
@@ -26,6 +26,9 @@ repositories {
 }
 
 publishing {
+	java {
+		withSourcesJar()
+	}
 	repositories {
 		maven {
 			url = "https://maven.pkg.github.com/ivorobioff/techmoodivns-app-support"
